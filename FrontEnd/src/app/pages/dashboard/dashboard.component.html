@@ -1,0 +1,115 @@
+<nz-table #clientTable [nzData]="clientList" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th nzWidth="60px"></th>
+      <th>ID</th>
+      <th>Razão Social</th>
+      <th>Nome Fantasia</th>
+      <th>E-mail</th>
+      <th>CNPJ</th>
+      <th>Telefone</th>
+      <th>Usuario de Cadastro</th>
+      <th>Data do Cadastro</th>
+      <th>Usuario de Edição</th>
+      <th>Data da Edição</th>
+      <th>Vincular endereço</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let client of clientTable.data">
+      <tr>
+        <td
+          [nzExpand]="expandSet.has(client.id)"
+          (nzExpandChange)="onExpandChange(client.id, $event)"
+        ></td>
+        <td>{{ client.id }}</td>
+        <td>{{ client.razaoSocial }}</td>
+        <td>{{ client.nomeFantasia }}</td>
+        <td>{{ client.email }}</td>
+        <td *ngIf="client.cpfCnpj.indexOf('/') !== -1">{{ client.cpfCnpj | mask : "00.000.000/0000-00" }}</td>
+        <td *ngIf="client.cpfCnpj.indexOf('/') === -1">{{ client.cpfCnpj | mask : "000.000.000-00" }}</td>
+        <td>
+          {{ client.ddd | mask : "(00)" }}
+          {{ client.telefone | mask : "9 0000-0000" }}
+        </td>
+        <td>{{ client.nmUsuarioCadastro }}</td>
+        <td>{{ client.dtCadastro | date : "dd/MM/YYYY HH:mm:SS" }}</td>
+        <td>{{ client.nmUsuarioAlteracao }}</td>
+        <td>{{ client.dtAlteracao | date : "dd/MM/YYYY HH:mm:SS" }}</td>
+        <td class="text-center">
+          <span
+            class="text-primary"
+            nz-icon
+            nzType="plus-circle"
+            nzTheme="outline"
+            routerLink="/cliente/{{client.id}}/endereco/incluir"
+          ></span>
+        </td>
+        <td>
+          <span
+            (click)="deleteUser(client.id)"
+            style="margin-right: 1rem; cursor: pointer"
+            class="text-danger"
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+          ></span>
+          <span
+            class="text-primary"
+            nz-icon
+            nzType="edit"
+            nzTheme="outline"
+            routerLink="/cliente/editar/{{ client.id }}"
+          ></span>
+        </td>
+      </tr>
+      <tr [nzExpand]="expandSet.has(client.id)">
+        <nz-table #addressTable [nzData]="client.addressList" nzTableLayout="fixed">
+          <thead>
+            <tr>
+              <th>CEP</th>
+              <th>Rua</th>
+              <th>Complemento</th>
+              <th>Número</th>
+              <th>Bairro</th>
+              <!-- <th>Cidade</th> -->
+              <th>Estado</th>
+              <th>Pais</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let address of addressTable.data">
+              <td>{{address.cep | mask:'00.000-000'}}</td>
+              <td>{{address.endereco}}</td>
+              <td>{{address.complementoEndereco}}</td>
+              <td>{{address.numeroEndereco}}</td>
+              <td>{{address.bairro}}</td>
+              <!-- <td>{{address.}}</td> -->
+              <td>{{findStateName(address.idEstado)}}</td>
+              <td>Brasil</td>
+              <td>
+                <span
+                  (click)="deleteAddress(address.id, client.id)"
+                  style="margin-right: 1rem; cursor: pointer"
+                  class="text-danger"
+                  nz-icon
+                  nzType="delete"
+                  nzTheme="outline"
+                ></span>
+                <span
+                  class="text-primary"
+                  nz-icon
+                  nzType="edit"
+                  nzTheme="outline"
+                  routerLink="/cliente/{{client.id}}/endereco/editar/{{address.id}}"
+                ></span>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </tr>
+    </ng-container>
+  </tbody>
+</nz-table>

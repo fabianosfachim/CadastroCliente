@@ -1,0 +1,104 @@
+<form [formGroup]="addressForm">
+    <div class="row">
+      <nz-page-header
+        class="site-page-header"
+        (nzBack)="onBack()"
+        nzBackIcon
+        nzTitle="{{ title.getTitle() }}"
+        nzSubtitle=""
+      ></nz-page-header>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <label for="razao">CEP</label>
+        <input type="text" class="form-control" mask="00.000-000" (blur)="getAddressByCep(addressForm.controls['cep'].value)" formControlName="cep" [ngClass]="cep?.invalid && (cep?.dirty || cep?.touched) ? 'border-danger' : ''" />
+        <div *ngIf="cep?.invalid && (cep?.dirty || cep?.touched)" class="text-danger">
+          <div *ngIf="cep?.errors && cep?.errors?.['required']">
+            O campo é obrigatorio.
+          </div>
+          <div *ngIf="cep?.errors?.['minlength']">
+            O campo deve ter no minimo 8 caracteres.
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <label for="nmFantasia">Rua</label>
+        <input type="text" class="form-control" formControlName="street"  [ngClass]="street?.invalid && (street?.dirty || street?.touched) ? 'border-danger' : ''" />
+        <div *ngIf="street?.invalid && (street?.dirty || street?.touched)" class="text-danger">
+          <div *ngIf="street?.errors && street?.errors?.['required']">
+            O campo é obrigatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="nmFantasia">Complemento</label>
+        <input type="text" class="form-control" formControlName="complement" />
+      </div>
+
+      <div class="col-md-1">
+        <label for="nmFantasia">Número</label>
+        <input type="text" class="form-control" mask="00000" formControlName="number"  [ngClass]="number?.invalid && (number?.dirty || number?.touched) ? 'border-danger' : ''" />
+        <div *ngIf="number?.invalid && (number?.dirty || number?.touched)" class="text-danger">
+          <div *ngIf="number?.errors && number?.errors?.['required']">
+            O campo é obrigatorio.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <label for="cnpj">Bairro</label>
+        <input type="text" class="form-control" formControlName="neighborhood" [ngClass]="neighborhood?.invalid && (neighborhood?.dirty || neighborhood?.touched) ? 'border-danger' : ''" />
+        <div *ngIf="neighborhood?.invalid && (neighborhood?.dirty || neighborhood?.touched)" class="text-danger">
+          <div *ngIf="neighborhood?.errors && neighborhood?.errors?.['required']">
+            O campo é obrigatorio.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="mail">Cidade</label>
+        <input type="city" class="form-control" formControlName="city"  [ngClass]="city?.invalid && (city?.dirty || city?.touched) ? 'border-danger' : ''" />
+        <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="text-danger">
+          <div *ngIf="city?.errors && city?.errors?.['required']">
+            O campo é obrigatorio.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="state">Estado</label>
+        <input type="text" class="form-control" formControlName="state" [ngClass]="state?.invalid && (state?.dirty || state?.touched) ? 'border-danger' : ''" />
+        <div *ngIf="state?.invalid && (state?.dirty || state?.touched)" class="text-danger">
+          <div *ngIf="state?.errors && state?.errors?.['required']">
+            O campo é obrigatorio.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="tel">País</label>
+        <input type="text" class="form-control" formControlName="country" [ngClass]="country?.invalid && (country?.dirty || country?.touched) ? 'border-danger' : ''" />
+        <div *ngIf="country?.invalid && (country?.dirty || country?.touched)" class="text-danger">
+          <div *ngIf="country?.errors && country?.errors?.['required']">
+            O campo é obrigatorio.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group mt-3" style="float: right">
+          <button class="btn btn-danger" routerLink="/dashboard">Cancelar</button>
+          <button
+            class="btn btn-primary"
+            (click)="
+              isEdit ? editAdress(addressForm.getRawValue()) : registerAddress(addressForm.getRawValue())
+            "
+          >
+            {{ isEdit ? "Editar" : "Salvar" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+  

@@ -1,0 +1,103 @@
+<form [formGroup]="clientForm">
+  <div class="row">
+    <nz-page-header
+      class="site-page-header"
+      (nzBack)="onBack()"
+      nzBackIcon
+      nzTitle="{{ title.getTitle() }}"
+      nzSubtitle=""
+    ></nz-page-header>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label for="razao">Razão Social</label>
+      <input type="text" class="form-control" formControlName="razaoSocial" [ngClass]="razaoSocial?.invalid && (razaoSocial?.dirty || razaoSocial?.touched) ? 'border-danger' : ''" />
+      <div *ngIf="razaoSocial?.invalid && (razaoSocial?.dirty || razaoSocial?.touched)" class="text-danger">
+        <div *ngIf="razaoSocial?.errors && razaoSocial?.errors?.['required']">
+          O campo é obrigatorio.
+        </div>
+        <div *ngIf="razaoSocial?.errors?.['minlength']">
+          O campo deve ter no minimo 10 caracteres.
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <label for="nmFantasia">Nome Fantasia</label>
+      <input type="text" class="form-control" formControlName="nomeFantasia"  [ngClass]="nomeFantasia?.invalid && (nomeFantasia?.dirty || nomeFantasia?.touched) ? 'border-danger' : ''" />
+      <div *ngIf="nomeFantasia?.invalid && (nomeFantasia?.dirty || nomeFantasia?.touched)" class="text-danger">
+        <div *ngIf="nomeFantasia?.errors && nomeFantasia?.errors?.['required']">
+          O campo é obrigatorio.
+        </div>
+        <div *ngIf="nomeFantasia?.errors?.['minlength']">
+          O campo deve ter no minimo 5 caracteres.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-3">
+      <label for="cnpj">CPF / CNPJ</label>
+      <input type="text" class="form-control" formControlName="cpfCnpj" mask="CPF_CNPJ"  [ngClass]="cpfCnpj?.invalid && (cpfCnpj?.dirty || cpfCnpj?.touched) ? 'border-danger' : ''" />
+      <div *ngIf="cpfCnpj?.invalid && (cpfCnpj?.dirty || cpfCnpj?.touched)" class="text-danger">
+        <div *ngIf="cpfCnpj?.errors && cpfCnpj?.errors?.['required']">
+          O campo é obrigatorio.
+        </div>
+        <div *ngIf="cpfCnpj?.errors?.['minlength']">
+          O campo deve ter no minimo 11 caracteres.
+        </div>
+        <div *ngIf="cpfCnpj?.errors?.['maxlength']">
+          O campo deve ter no minimo 14 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="mail">E-mail</label>
+      <input type="email" class="form-control" formControlName="email"  [ngClass]="email?.invalid && (email?.dirty || email?.touched) ? 'border-danger' : ''" />
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger">
+        <div *ngIf="email?.errors && email?.errors?.['required']">
+          O campo é obrigatorio.
+        </div>
+        <div *ngIf="email?.errors?.['email']">
+          O campo deve conter um e-mail valido.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <label for="ddd">DDD</label>
+      <input type="text" class="form-control" formControlName="ddd" mask="(00)"  [ngClass]="ddd?.invalid && (ddd?.dirty || ddd?.touched) ? 'border-danger' : ''" />
+      <div *ngIf="ddd?.invalid && (ddd?.dirty || ddd?.touched)" class="text-danger">
+        <div *ngIf="ddd?.errors && ddd?.errors?.['required']">
+          O campo é obrigatorio.
+        </div>
+        <div *ngIf="ddd?.errors?.['minlength']">
+          O campo deve ter no minimo 2 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label for="tel">Telefone</label>
+      <input type="text" class="form-control" formControlName="telefone" mask="9 0000-0000" [ngClass]="telefone?.invalid && (telefone?.dirty || telefone?.touched) ? 'border-danger' : ''" />
+      <div *ngIf="telefone?.invalid && (telefone?.dirty || telefone?.touched)" class="text-danger">
+        <div *ngIf="telefone?.errors && telefone?.errors?.['required']">
+          O campo é obrigatorio.
+        </div>
+        <div *ngIf="telefone?.errors?.['minlength']">
+          O campo deve ter no minimo 8 caracteres.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group mt-3" style="float: right">
+        <button class="btn btn-danger" routerLink="/dashboard">Cancelar</button>
+        <button
+          class="btn btn-primary"
+          (click)="isEdit ? editUser(clientForm.value) : registerUser(clientForm.value)">
+          {{ isEdit ? "Editar" : "Salvar" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

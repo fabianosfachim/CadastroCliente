@@ -1,0 +1,83 @@
+.ftco-section {
+  padding: 7em 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+
+  .form-control {
+    background: transparent;
+    border: none;
+    height: 50px;
+    color: white !important;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+
+    &:-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    &:placeholder {
+      color: #6c757d;
+      opacity: 1;
+    }
+
+    &:hover,
+    &:focus {
+      background: transparent;
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border-color: rgba(255, 255, 255, 0.4)
+    }
+  }
+
+  .heading-section {
+    font-size: 28px;
+    color: #fff;
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  // #4ae0e7
+
+  .btn.btn-primary {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff !important;
+  }
+}
+
+.login-wrap {
+  position: relative;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+form {
+  display: block;
+  margin-top: 0em;
+}
+
+.logo-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .company-logo {
+    width: 8rem;
+    height: 8rem;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100px;
+    padding: 2rem;
+  }
+}

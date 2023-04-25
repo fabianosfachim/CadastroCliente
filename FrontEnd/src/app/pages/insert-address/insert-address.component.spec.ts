@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { InsertAddressComponent } from './insert-address.component';
+
+describe('InsertAddressComponent', () => {
+  let component: InsertAddressComponent;
+  let fixture: ComponentFixture<InsertAddressComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ InsertAddressComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(InsertAddressComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
